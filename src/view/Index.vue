@@ -41,6 +41,11 @@ export default {
     FieryGuess,
     PacketGuess
   },
+  created() {
+    this.$http.get("http://localhost:8080/api/foods").then(res => {
+      console.log(res);
+    });
+  },
   data() {
     return {
       currentComp: "FriendsGuess"
