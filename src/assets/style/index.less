@@ -1,0 +1,336 @@
+// 公用
+html{
+    background: #eaedfd;
+}
+// index tab
+.tab-items{
+    position: relative;
+    display: flex;  
+    width: 640px;
+    height: 112px;
+    background: url('../img/tab_bg.png');
+    background-size: contain;
+    .item{
+        &:first-child{
+            padding-left: 36px;
+        }
+        width: 120px;
+        height: 100%;
+        padding: 0 24px;
+        text-align: center;
+        font-size: 0;//去除inline-block元素间间距
+        -webkit-text-size-adjust:none;
+        &.active{
+            img{
+                opacity: 1!important; 
+            }
+            p{
+                color: #fff!important;
+                border-bottom: 4px solid rgb(70, 209, 255);
+                box-sizing: border-box
+            }
+        }
+        img{
+            width: auto;
+            height: 64px;
+            margin-top: 12px;
+            opacity: .7;
+        }
+        p{
+            font-size: 18px;
+            line-height: 18px;
+            font-style: italic;
+            color: #9ac5ff;
+            padding: 7px 0 8px;
+            box-sizing: border-box;
+        }
+    } 
+    .tab_line{
+        width: 8px;
+        height: 112px;
+        text-align: center; 
+        background: url('../img/ic_line.png')no-repeat center center;
+        background-size: contain;
+    }  
+    .tab_msg{
+        width: 98px;
+        height: 112px;
+        text-align: center;
+        margin-right: 10px;
+        background: url('../img/ic_msg.png')no-repeat center right;
+        background-size: 40px;
+    }
+}
+// index content
+.tab-content{
+    position: relative;
+    width: 640px;
+    padding-bottom: 65px;
+}
+//  index footer
+.guess-footer{
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    width: 600px;
+    height: 65px;
+    line-height: 65px;
+    color: #646e8a;
+    text-transform: uppercase; 
+    margin-left: 20px;
+    padding: 0;
+    li{
+        position: relative;
+        padding-left: 60px;
+        padding-right: 30px;
+        // width: 194px;
+        height: 65px;
+        font-size: 24px;
+        box-sizing: border-box;
+        &.foo-infro{
+            background: url('../img/ic_intro.png')no-repeat 30px center;
+            background-size: 24px 24px;
+        }
+        &.foo-record{
+            background: url('../img/ic_record.png')no-repeat 30px center;
+            background-size: 24px 24px;
+        }
+        &.foo-public{
+            background: url('../img/ic_public.png')no-repeat 30px center;
+            background-size: 24px 24px;
+        }
+    } 
+    .foo_line {
+        width: 2px;
+        height: 65px;
+        line-height: 65px;
+        background: url('../img/ic_foo_line.png')no-repeat center center;
+        background-size: contain;
+      }
+}
+
+// detail header
+.detail-head{
+    position: relative;
+    display: flex;
+    width: 640px;
+    height: 172px;
+    background: url('../img/detail_bg.png')no-repeat center center;
+    background-size: contain;
+    .user-logo{
+        width: 69px;
+        height: 69px;
+        margin-left: 14px;
+        margin-top: 30px;
+        margin-right: 8px;
+        border:6px solid rgb(49, 65, 136);
+        border-radius: 50%;
+        background-color: rgb(255, 255, 255);
+        overflow: hidden;
+        img{
+            width: 100%;
+        }
+    }
+    .user-info{
+        position: relative;
+        width: 520px;
+        padding: 34px 0 20px;
+        .user-name{
+            font-size: 30px;
+            color: rgb(246, 248, 255);
+            text-transform: uppercase;
+            line-height: 30px;
+            padding-bottom: 20px;  
+        }
+        .user-friend{
+            font-size: 24px;
+            color: rgb(246, 248, 255);
+            text-transform: uppercase;
+            line-height: 30px;
+            float: right;
+            .join-num{
+                font-size: 34px;
+                color: rgb(246, 248, 255);
+                text-transform: uppercase;
+                line-height: 30px;                 
+            }            
+        }
+        .user-note{
+            font-size: 24px;
+            color: rgb(87, 118, 204);
+            text-transform: uppercase;
+            line-height: 34px;
+          }
+          
+    }
+}
+
+// detail guess
+.detail-guess{
+    position: relative;
+    padding: 40px 20px 0;
+    background: #f8f9ff;
+    padding-bottom: 42px;
+    .guess-title {
+        position: relative;
+        font-size: 28px;
+        font-weight: normal;
+        line-height: 40px;
+        margin: 0;
+        color: rgb(100, 110, 138);
+        text-transform: uppercase;
+        padding-left: 40px;
+        box-sizing: border-box;
+        background: url(../img/ic_Q_red.png)no-repeat left 6px ;
+        background-size: 32px;
+    }
+    .guess-time {
+        display: block;
+        font-size: 24px;
+        line-height: 40px;
+        color: rgb(187, 198, 229);
+        text-transform: uppercase;
+        margin-left:40px;
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 4px dashed rgb(187, 198, 229);
+    }
+    .guess-option {
+        display: flex;
+        width: 598px;
+        height: 122px;
+        padding: 0;
+        margin-top: 24px;
+        box-sizing: border-box;
+        border:3px solid rgb(43, 132, 232);
+        border-radius: 12px;
+        background-color: rgb(255, 255, 255);
+        li{
+            flex:1;
+            height: 115px;
+            text-align: center;
+            margin-top: 1px; 
+            border-right: 2px solid rgb(208, 230, 255);
+            &:last-child{
+                border-right:0;
+            }
+            p{
+                font-size: 28px;
+                color: rgb(43, 132, 232);
+                text-transform: uppercase;
+                line-height: 40px; 
+                padding-top: 5px;  
+                padding-bottom: 6px;
+                box-sizing: border-box;   
+            }
+            img{
+                width: 56px;
+                height:56px;
+            }
+        }
+    }
+}
+.guess-list{
+    position: absolute;
+    top: 552px;
+    bottom: 0px;
+    display: flex;
+    width: 640px;
+    background-color: #eaedfd;
+    .list-content{
+        position: relative;
+        border-right: 2px solid #f8f9ff;
+        box-sizing: border-box;
+        &:nth-child(1){
+            width: 222px; 
+            .list-num{
+                left: calc(50%+10px); 
+            }
+            .list-text{
+                padding-left: 20px;
+            }
+        }
+        &:nth-child(2){
+            width: 199px; 
+            .list-num{
+                left: 50%; 
+            }
+        }
+        &:nth-child(3){
+            width: 219px;
+            border: 0; 
+            .list-num{
+                left: calc(50%-10px); 
+            }
+            .list-text{
+                padding-right: 20px;
+            }
+        }
+        .list-num{
+            display: block;
+            position: absolute;
+            top: -16px;
+            font-size: 28px;
+            line-height: 28px;
+            color: #ffffff;
+            background: #7781ac;
+            padding: 2px 10px;
+            border-radius: 16.41px;
+            transform: translate(-50%, 0%);  
+        }
+        .list-text {
+            box-sizing: border-box;
+            margin-top: 24px;
+            font-size: 18px;
+            color: rgb(119, 129, 172);
+            text-transform: uppercase;
+            line-height: 18px;
+            text-align: center;
+        }
+        .list-friend{
+            padding-left: 20px;
+            padding-top: 30px;
+            li{
+                display: flex;
+                margin-bottom: 20px;
+                img{
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    background: #bbbbbb;
+                }
+                .friend-name{
+                    font-size: 24px;
+                    color: rgb(100, 110, 138);
+                    line-height: 2.167;
+                    line-height: 32px;
+                    padding-left: 6px;
+                    box-sizing: border-box;
+                    overflow: hidden;
+                    text-overflow:ellipsis;
+                    white-space: nowrap;
+                }        
+            }
+        }  
+    }
+}
+
+.tan{
+    position: fixed;
+    bottom: 30px;
+    right: 10px;
+    width: 52px;
+    height: 52px;
+    background: url(../img/ic_tan.png)no-repeat center center;
+    background-size: contain;
+    .forbid{
+        position: absolute;
+        top:0;
+        right: 0;
+        width: 17px;
+        height: 16px;
+        background: url(../img/ic_forbid.png)no-repeat center center;
+        background-size: contain;
+    }
+      
+}
