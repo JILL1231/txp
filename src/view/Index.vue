@@ -42,7 +42,7 @@ export default {
     PacketGuess
   },
   created() {
-    this.$http.get("/api/seller").then(res => {
+    this.$http.post("/api/seller").then(res => {
       console.log(res);
     });
   },
