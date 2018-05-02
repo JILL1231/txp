@@ -341,7 +341,8 @@
   }
 
 *{
-    margin: 0
+    margin: 0;
+    border:0;
   }
 /* 去除列表左侧原点 */
 li {
@@ -356,3 +357,8 @@ input:-moz-placeholder,textarea:-moz-placeholder{
 }
 /* 去除chrome浏览器中input获得焦点时的橙色边框 */
 input,button,select,textarea{outline:none}
+
+/* 解决vw兼容方案使用viewport的polyfill：Viewport Units Buggyfill,img不显示的问题*/
+img{
+  content: normal !important;
+}

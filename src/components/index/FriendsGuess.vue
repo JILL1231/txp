@@ -81,7 +81,6 @@ export default {
       top: -3px;
       width: 63px;
       height: 64px;
-      z-index: 2;
       border-radius: 50%;
       background-color: rgb(43, 132, 232);
       &::after {
@@ -102,7 +101,6 @@ export default {
       top: 0;
       width: 117px;
       height: 9px;
-      z-index: 2;
       border-radius: 4px;
       background-color: rgb(43, 132, 232);
     }
@@ -112,7 +110,6 @@ export default {
       top: 0;
       width: 13px;
       height: 9px;
-      z-index: 2;
       border-radius: 4px;
       background-color: rgb(43, 132, 232);
     }
@@ -122,7 +119,6 @@ export default {
       bottom: 0;
       width: 13px;
       height: 8px;
-      z-index: 2;
       border-radius: 4px;
       background-color: rgb(237, 92, 81);
     }
@@ -132,7 +128,6 @@ export default {
       bottom: 0;
       width: 94px;
       height: 8px;
-      z-index: 2;
       border-radius: 4px 0 4px 4px;
       background-color: rgb(237, 92, 81);
     }
@@ -142,8 +137,9 @@ export default {
     top: 196px;
     width: 36px;
     height: 36px;
+    padding: 0;
     border-radius: 50%;
-    z-index: 24;
+    z-index: 2;
     &.btn-front {
       left: 10px;
       background: url(../../assets/img/ic_front.png)rgb(157, 164, 195) no-repeat

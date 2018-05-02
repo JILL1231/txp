@@ -39,7 +39,7 @@
           </li>
           <li>
             <img src="../assets/img/friend_logo_1.png" alt="">
-            <p class="friend-name">Windy撒打算大</p>
+            <p class="friend-name">Windy撒打算的大</p>
           </li>
           <li>
             <img src="../assets/img/friend_logo_1.png" alt="">
