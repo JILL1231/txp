@@ -5,65 +5,29 @@
         <img src="../assets/img/user_logo.png" alt="">
       </div>
       <div class="user-info">
-        <p class="user-friend"><span class="join-num">48</span>/50位好友参与</p>
-        <h3 class="user-name">盼盼</h3>
-        <p class="user-note">小伙伴们___快来猜题___看看今晚英格兰对德国时能_否给力~~</p>
+        <p class="user-friend"><span class="join-num">{{guessDetail.joinNum}}</span>/{{totalNum || guessDetail.totalNum}}位好友参与</p>
+        <h3 class="user-name">{{guessDetail.userName}}</h3>
+        <p class="user-note">{{ note|| guessDetail.note}}</p>
       </div>
     </header>
     <section class="detail-guess">
-      <h3 class="guess-title">今晚02:30欧洲杯，16强晋级赛法国vs英格兰90分钟比赛结果？</h3>
-      <span class="guess-time">截止时间_6月25日_2:00</span>
+      <h3 class="guess-title">{{qus.title || guessDetail.title}}</h3>
+      <span class="guess-time">截止时间{{qus.date || guessDetail.date}}</span>
       <ul class="guess-option">
-        <li>
-          <p>A.法国胜</p>
-          <img src="../assets/img/ic_flower.png" alt="">
-        </li>
-        <li>
-          <p>B.平</p>
-          <img src="../assets/img/ic_flower.png" alt="">
-        </li>
-        <li>
-          <p>C.英格兰胜</p>
+        <li v-for="(option,index) in options" :key="option.id">
+          <p>{{index}}{{option.text}}</p>
           <img src="../assets/img/ic_flower.png" alt="">
         </li>
       </ul>            
     </section>
     <section class="guess-list">
-      <div class="list-content">
-        <span class="list-num">8</span>
+      <div class="list-content"  v-for="item in items" :key="item.id">
+        <span class="list-num">{{item.sup}}</span>
         <p class="list-text">好友献花支持</p>
         <ul class="list-friend">
-          <li>
-            <img src="../assets/img/friend_logo_1.png" alt="">
-            <p class="friend-name">Windy</p>
-          </li>
-          <li>
-            <img src="../assets/img/friend_logo_1.png" alt="">
-            <p class="friend-name">Windy撒打算的大</p>
-          </li>
-          <li>
-            <img src="../assets/img/friend_logo_1.png" alt="">
-            <p class="friend-name">Windy大撒打算大</p>
-          </li>
-        </ul>
-      </div>
-      <div class="list-content">
-        <span class="list-num">12</span>
-        <p class="list-text">好友献花支持</p>
-        <ul class="list-friend">
-          <li>
-            <img src="../assets/img/friend_logo_1.png" alt="">
-            <p class="friend-name">Windy</p>
-          </li>
-        </ul>
-      </div>
-      <div class="list-content">
-        <span class="list-num">12</span>
-        <p class="list-text">好友献花支持</p>
-        <ul class="list-friend">
-          <li>
-            <img src="../assets/img/friend_logo_1.png" alt="">
-            <p class="friend-name">Windy</p>
+          <li v-for="(listItem, index) in item.list" :key="listItem.listId">
+            <img :src="`/static/images/friend_logo_${index + 1}.png`" alt="">
+            <p class="friend-name">{{listItem.friendName}}</p>
           </li>
         </ul>
       </div>
@@ -74,7 +38,39 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      guessDetail: {
+        supList: [
+          {
+            list: [{ friendName: "" }]
+          }
+        ]
+      },
+      items:[],
+      lists:[],
+      qus: {},
+      options:[],
+      note:'',
+      totalNum:'',
+    };
+  },
+  mounted() {
+    if (this.$route.params.qus && typeof this.$route.params.qus.id !== 'undefined') {
+      this.qus = this.$route.params.qus;
+      this.options = this.$route.params.qus.option;
+      this.note = this.$route.params.note;
+      this.totalNum = this.$route.params.totalNum;
+    }
+    this.$http.post("/api/guessDetail").then(res => {
+      this.guessDetail = res.data;
+      this.items = res.data.supList;
+      this.options = res.data.option;
+      console.log(res);
+    });
+  }
+};
 </script>
 <style>
 

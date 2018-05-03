@@ -24,13 +24,14 @@
       </div>    
     </div>
     <div class="topic-num">
-      <label for="topicNum">参与人数</label>
-      <input type="number" id="topicNum" placeholder="请输入人数" v-model="num">
+      <label for="totalNum">参与人数</label>
+      <input type="number" id="totalNum" placeholder="请输入人数" v-model="totalNum" @change="changeHandler">
     </div>
+    <p class="trip" v-show='show'>参与人数不能少于1人哦</p>
     <textarea
       class="note-text"
       placeholder="小伙伴们，一起来参加我发起的竞猜吧！每人_一次献一朵花，买定离手哦！"
-      v-model="note"
+      v-model.trim="note"
       ></textarea>
     <button type="submit" class="topic-submit" @click="submitHandler">确认发起竞猜</button>    
   </div>
@@ -43,7 +44,8 @@ export default {
     return {
       index: 0,
       itemCommon: [],
-      num: 1,
+      show:false,
+      totalNum: '',
       note: ''
     };
   },
@@ -55,24 +57,30 @@ export default {
     setTimeout(() => {
       this.item = 10;
     }, 6000);
-    this.$http.post("/api/seller").then(res => {
+    this.$http.post("/api/guess").then(res => {
       this.itemCommon= res.data.obj;
       console.log(res);
     });
   },
   methods: {
     addError() {
-
+      this.show = true;
+    },
+    changeHandler(){
+      this.show = false;
     },
     submitHandler() {
-      if (typeof (this.num) !== 'number' || this.num < 1 || this.note === '') {
+      if (this.totalNum < 1) {
         this.addError()
         return
+      }
+      if(this.note === ''){
+        this.note = '小伙伴们，一起来参加我发起的竞猜吧！每人_一次献一朵花，买定离手哦！'
       }
       this.$router.push({
         name: 'detail',
         params: {
-          num: this.num,
+          totalNum: this.totalNum,
           note: this.note,
           qus: this.itemCommon[this.index]
         }
@@ -281,6 +289,15 @@ export default {
     text-transform: uppercase;
     border-radius: 12px;
     background-color: rgb(237, 92, 81);
+  }
+  .trip{
+    position: relative;
+    width: 600px;
+    margin: 30px auto 0;
+    text-align: left;
+    line-height: 24px;
+    font-size: 24px;
+    color: rgb(237, 92, 81);
   }
 }
 </style>
