@@ -3,10 +3,19 @@ const router = express.Router()
 const Mock = require('mockjs')
 var Random = Mock.Random
 
-router.get('/data',(req,res)=>{
-    const mockData = {
-        email:Random.email()
+
+
+router.post('/seller',(req,res)=>{
+    try{
+        const mockData = {
+            email:Random.email()
+        }
+        console.log(mockData);
+        res.json(mockData);
+    }catch(error){
+        console.log(error);
+        res.json(error);
     }
-    res.json(mockData);
+    
 })
 module.exports = router;
