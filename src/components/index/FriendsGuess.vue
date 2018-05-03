@@ -11,13 +11,13 @@
         <span class="pattern4"></span>
         <span class="pattern5"></span>
         <swipe class="slide" v-model="index"  :speed="300">
-          <swipe-item v-for="i in guessDate" :key="i">
-            <h3 class="topic-title">{{guessDate.title}}？</h3>
-            <span class="topic-time">截止时间{{guessDate.date}}</span>
+          <swipe-item v-for="i in itemCommon" :key="i">
+            <h3 class="topic-title">{{i.title}}？</h3>
+            <span class="topic-time">截止时间{{i.date}}</span>
             <ul class="topic-option">
-              <li>A.{{guessDate.option[0]}}</li>
-              <li>B.{{guessDate.option[1]}}</li>
-              <li>C.{{guessDate.option[2]}}</li>
+              <li>A.{{i.option[0]}}</li>
+              <li>B.{{i.option[1]}}</li>
+              <li>C.{{i.option[0]}}</li>
             </ul>
           </swipe-item>
         </swipe>
@@ -38,12 +38,13 @@ export default {
   data() {
     return {
       index: 0,
-      guessDate: []
+      itemCommon: 4,
+      guessDate:Object
     };
   },
   created() {
     this.$http.post("/api/seller").then(res => {
-      this.guessDate = res;
+      this.itemCommon= res;
       console.log(res);
     });
   },
