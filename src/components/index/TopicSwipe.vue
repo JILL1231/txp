@@ -43,6 +43,11 @@ export default {
       type: Number,
       default: 0
     },
+    pagination: {
+      // 默认导航器
+      type: Boolean,
+      default: true
+    },
     autoplayTime: {
       // 自动轮播时间间隔
       type: Number,
@@ -150,6 +155,10 @@ export default {
       // 为 wrapper 定宽
       this.$refs.wrapper.style.width = `${this.width}px`;
 
+      // 复制收尾 dom
+      this.clearCopies();
+      this.addCopies();
+
       // 自动轮播
       if (this.autoplayTime > 0) {
         this.autoChange();
@@ -162,15 +171,60 @@ export default {
 
     initDatas() {
       const style = getComputedStyle(this.$el, false).width;
+      let slots = this.$slots.default;
       this.width = parseInt(style, 10);
-      this.pages = this.$slots.default
-        .filter(
-          vnode => vnode.tag && vnode.elm.classList.contains("c-swipe-item")
-        )
-        .map(vnode => vnode.elm);
-      this.length = this.pages.length;
+      if (slots) {
+        this.pages = slots
+          .filter(
+            vnode => vnode.tag && vnode.elm.classList.contains("c-swipe-item")
+          )
+          .map(vnode => vnode.elm);
+        this.length = this.pages.length;
+      }
     },
 
+    clearCopies() {
+      const children = this.$refs.wrapper.querySelectorAll(
+        ".c-swipe-item-copy"
+      );
+      [...children].forEach(el => {
+        this.$refs.wrapper.removeChild(el);
+      }, this);
+      this.$refs.wrapper.style.marginLeft = "0";
+    },
+
+    addCopies() {
+      const fronts = [];
+      const ends = [];
+      // copy 前两个和最后两个元素
+      this.pages.forEach((item, index) => {
+        if (index < 2) {
+          const copy = item.cloneNode(true);
+          copy.classList.add("c-swipe-item-copy");
+          fronts.push(copy);
+        }
+        if (index > this.pages.length - 3) {
+          const copy = item.cloneNode(true);
+          copy.classList.add("c-swipe-item-copy");
+          ends.push(copy);
+        }
+      }, this);
+
+      this.copyNum = ends.length;
+      // insert node
+      while (ends.length) {
+        const item = ends.pop();
+        const firstNode = this.$refs.wrapper.querySelector(".c-swipe-item");
+        this.$refs.wrapper.insertBefore(item, firstNode);
+      }
+
+      while (fronts.length) {
+        const item = fronts.shift();
+        this.$refs.wrapper.appendChild(item);
+      }
+
+      this.$refs.wrapper.style.marginLeft = `-${this.width * this.copyNum}px`;
+    },
 
     handleTouchstart(e) {
       if (this.length <= 1 || this.moving) return;
@@ -466,6 +520,7 @@ export default {
 };
 </script>
 
+
 <style lang="postcss">
 .c-swipe {
   overflow: hidden;
@@ -482,5 +537,4 @@ export default {
   height: 100%;
   flex: none;
 }
-
 </style>

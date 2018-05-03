@@ -1,9 +1,9 @@
-<template>
+  <template>
   <div class="friend-guess">
     <div class="topic-warp">
       <div class="topic-text">请确认一道竞猜题目，发起好友竞猜</div>
-      <button class="swipe-btn btn-front" @click="index = index >= 5 ? 0 : index + 1"></button>
-      <button class="swipe-btn btn-back" @click="index = index <= 0 ? 5 : index - 1"></button>
+      <button class="swipe-btn btn-front" @click="index = index <= 0 ? itemCommon.length : index - 1"></button>
+      <button class="swipe-btn btn-back" @click="index = index >= itemCommon.length ? 0 : index + 1"></button>
       <div class="topic-swipe">
         <span class="pattern1"></span>
         <span class="pattern2"></span>
@@ -11,13 +11,13 @@
         <span class="pattern4"></span>
         <span class="pattern5"></span>
         <swipe class="slide" v-model="index"  :speed="300">
-          <swipe-item v-for="i in itemCommon" :key="i">
+          <swipe-item v-for="i in itemCommon" :key="i.id">
             <h3 class="topic-title">{{i.title}}？</h3>
             <span class="topic-time">截止时间{{i.date}}</span>
             <ul class="topic-option">
-              <li>A.{{i.option[0]}}</li>
-              <li>B.{{i.option[1]}}</li>
-              <li>C.{{i.option[0]}}</li>
+              <li>A.{{i.option[0].text}}</li>
+              <li>B.{{i.option[1].text}}</li>
+              <li>C.{{i.option[2].text}}</li>
             </ul>
           </swipe-item>
         </swipe>
@@ -25,10 +25,14 @@
     </div>
     <div class="topic-num">
       <label for="topicNum">参与人数</label>
-      <input type="number" name="topicNum" id="topicNum" placeholder="请输入人数">
+      <input type="number" id="topicNum" placeholder="请输入人数" v-model="num">
     </div>
-    <textarea name="topicNote" id="topicNote" placeholder="小伙伴们，一起来参加我发起的竞猜吧！每人_一次献一朵花，买定离手哦！"></textarea>
-    <button type="submit" class="topic-submit">确认发起竞猜</button>    
+    <textarea
+      class="note-text"
+      placeholder="小伙伴们，一起来参加我发起的竞猜吧！每人_一次献一朵花，买定离手哦！"
+      v-model="note"
+      ></textarea>
+    <button type="submit" class="topic-submit" @click="submitHandler">确认发起竞猜</button>    
   </div>
 </template>
 <script>
@@ -38,15 +42,10 @@ export default {
   data() {
     return {
       index: 0,
-      itemCommon: 4,
-      guessDate:Object
+      itemCommon: [],
+      num: 1,
+      note: ''
     };
-  },
-  created() {
-    this.$http.post("/api/seller").then(res => {
-      this.itemCommon= res;
-      console.log(res);
-    });
   },
   components: {
     swipe: TopicSwipe,
@@ -56,6 +55,29 @@ export default {
     setTimeout(() => {
       this.item = 10;
     }, 6000);
+    this.$http.post("/api/seller").then(res => {
+      this.itemCommon= res.data.obj;
+      console.log(res);
+    });
+  },
+  methods: {
+    addError() {
+
+    },
+    submitHandler() {
+      if (typeof (this.num) !== 'number' || this.num < 1 || this.note === '') {
+        this.addError()
+        return
+      }
+      this.$router.push({
+        name: 'detail',
+        params: {
+          num: this.num,
+          note: this.note,
+          qus: this.itemCommon[this.index]
+        }
+      })
+    }
   }
 };
 </script>
@@ -232,7 +254,7 @@ export default {
       text-align: right;
     }
   }
-  textarea[name="topicNote"] {
+  .note-text {
     position: relative;
     width: 600px;
     height: 140px;
