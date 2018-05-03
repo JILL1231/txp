@@ -11,7 +11,7 @@
       </div>
     </header>
     <section class="detail-guess">
-      <h3 class="guess-title">{{qus.title || guessDetail.title}}</h3>
+      <h3 class="guess-title">{{qus.title || guessDetail.title}}?</h3>
       <span class="guess-time">截止时间{{qus.date || guessDetail.date}}</span>
       <ul class="guess-option">
         <li v-for="(option,index) in options" :key="option.id">
@@ -32,9 +32,7 @@
         </ul>
       </div>
     </section>
-    <div class="tan">
-      <span class="forbid"></span>
-    </div>
+    <router-link to="/Tan" class="tan"><span class="forbid"></span></router-link>
   </div>
 </template>
 <script>

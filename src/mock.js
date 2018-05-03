@@ -13,7 +13,7 @@ router.post('/guess', (req, res) => {
                 date: '_' + Random.date('M_dd') + '_' + Random.time('h:mm'),//随机生成时间
                 'option|3': [{
                     'id|+1':1,
-                    'text': Random.csentence(1, 4)
+                    'text': Random.word(1, 4)
                 }]
             }]
 
@@ -36,10 +36,10 @@ router.post('/guessDetail', (req, res) => {
             totalNum: Random.integer(300, 800),
             title: Random.ctitle(20, 30),//随机生成一句中文标题
             date: '_' + Random.date('M_dd') + '_' + Random.time('h:mm'),//随机生成时间
-            note:Random.cparagraph( 20,30 ),//随机生成一段中文文本
+            note:Random.cparagraph( 20,30 ),//随机生成一段中文文本,
             'option|3': [{
                 'id|+1':1,
-                'text': Random.csentence(1, 4)
+                'text': Random.word(1, 4)
             }],
             'supList|3': [{
                 'id|+1': 1,
