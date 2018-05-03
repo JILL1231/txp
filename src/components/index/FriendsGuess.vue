@@ -11,14 +11,13 @@
         <span class="pattern4"></span>
         <span class="pattern5"></span>
         <swipe class="slide" v-model="index"  :speed="300">
-          <swipe-item v-for="i in itemCommon" :key="i">
-            <h3 class="topic-title">今晚02:30欧洲杯，16强晋级赛法国vs英
-格兰90分钟比赛结果？</h3>
-            <span class="topic-time">截止时间_6月25日_2:00</span>
+          <swipe-item v-for="i in guessDate" :key="i">
+            <h3 class="topic-title">{{guessDate.title}}？</h3>
+            <span class="topic-time">截止时间{{guessDate.date}}</span>
             <ul class="topic-option">
-              <li>A.法国胜</li>
-              <li>B.平</li>
-              <li>C.英格兰胜</li>
+              <li>A.{{guessDate.option[0]}}</li>
+              <li>B.{{guessDate.option[1]}}</li>
+              <li>C.{{guessDate.option[2]}}</li>
             </ul>
           </swipe-item>
         </swipe>
@@ -39,8 +38,14 @@ export default {
   data() {
     return {
       index: 0,
-      itemCommon: 6
+      guessDate: []
     };
+  },
+  created() {
+    this.$http.post("/api/seller").then(res => {
+      this.guessDate = res;
+      console.log(res);
+    });
   },
   components: {
     swipe: TopicSwipe,

@@ -41,11 +41,7 @@ export default {
     FieryGuess,
     PacketGuess
   },
-  created() {
-    this.$http.post("/api/seller").then(res => {
-      console.log(res);
-    });
-  },
+  
   data() {
     return {
       currentComp: "FriendsGuess"
