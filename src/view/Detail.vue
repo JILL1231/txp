@@ -27,7 +27,7 @@
         <List ref="scroll" @loadmore="getList(item.id)" class="list-wrapper" :is-loading.sync="states[item.id]">
           <ul class="list-friend">
               <li v-for="listItem in listItems[item.id - 1]" :key="listItem.listId + Math.random()">
-                <!-- <img src="{{listItem.url}}" alt=""> -->
+                <img :src="listItem.url" alt="">
                 <p class="friend-name">{{listItem.friendName}}</p>
               </li>
           </ul>
@@ -78,7 +78,7 @@ export default {
         page:this.page,
         limit: this.limit
       }).then(res => {
-        this.$set(this.listItems, id - 1, this.listItems[id-1].concat(res.data.list))
+        this.$set(this.listItems, id-1 , this.listItems[id-1].concat(res.data.list))
         this.states[id] = false
         console.log(res);
       }).catch(error => {

@@ -62,7 +62,7 @@ router.post('/getList1', (req, res) => {
             'id': 1,
             'list|10': [{
                 'listId|+1': 1,
-                url:Random.image('100x100'),
+                url:Random.image('100x100','#bbb','tx'),
                 friendName: Random.cname()
             }]
         })
@@ -80,7 +80,7 @@ router.post('/getList2', (req, res) => {
             'id': 2,
             'list|10': [{
                 'listId|+1': 1,
-                url:Random.image('100x100'),
+                url:Random.image('100x100','#bbb','tx'),
                 friendName: Random.cname()
             }]
         })
@@ -98,7 +98,7 @@ router.post('/getList3', (req, res) => {
             'id': 3,
             'list|10': [{
                 'listId|+1': 1,
-                url:Random.image('100x100'),
+                url:Random.image('100x100','#bbb','tx'),
                 friendName: Random.cname()
             }]
         })
