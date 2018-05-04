@@ -22,6 +22,46 @@ html{
         color: rgb(43, 132, 232)
     }
 }
+
+// 淡入动画
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity:1;
+     }
+    40% {
+        opacity:.5;
+    }
+    80% {
+        opacity: 0;    
+    }
+}
+// 淡出动画
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity:0;
+    }
+    40% {
+        opacity: .5;    
+    }
+    80% {
+        opacity:1;
+    }
+}
+
+.dropdown_in {
+    animation-name: fadeIn;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-duration: 2s;
+}
+
+.dropdown_out {
+    animation-name: fadeOut;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-duration: 2s;
+}
+
 // index tab
 .tab-items{
     position: relative;
@@ -79,6 +119,26 @@ html{
         margin-right: 10px;
         background: url('../img/ic_msg.png')no-repeat center right;
         background-size: 40px;
+    }
+    .drop_down{
+        position: absolute;
+        top:112px;
+        right: 0;
+        padding: 10px 18px;
+        color: #fff;
+        border:1px solid #1c3e6c;
+        border-top: 0;
+        background: #204474;
+        border-bottom-left-radius: 4px;
+        z-index: 2;
+        li{
+            color: #bcc7e5;
+            font-size: 16px;
+            line-height: 40px;
+            &.active{
+                color: #fff;
+            }
+        }
     }
 }
 // index content

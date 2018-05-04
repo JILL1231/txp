@@ -32,7 +32,7 @@ export default {
       type: String,
       default: "-- 我是有底线滴 --"
     },
-    loaded: {
+    isLoading: {
         type: Boolean,
         default: false
     }
@@ -41,8 +41,6 @@ export default {
     return {
       // 用来判定数据是否加载完成
       isComplate: false,
-      // 用来判定是否正在加载数据
-      isLoading: false,
       // 组件容器
       scroll: null,
       // 正文容器
@@ -52,13 +50,9 @@ export default {
   watch: {
     // 监听isLoading，如果isLoading的值为true则代表触发了loadmore事件
     isLoading(val) {
-        this.$emit('update:loded', val)
-        if (val) {
-            this.$emit("loadmore");
+      if (val) {
+          this.$emit("loadmore");
         }
-    },
-    loaded(val) {
-        this.isLoading = val
     }
   },
   methods: {
@@ -77,16 +71,12 @@ export default {
       let scrollWrapH = this.scrollWrap.offsetHeight;
       // 组件容器滚的距离 + 组件容器本身距离大于或者等于正文容器高度 - 指定数值 则触发loadmore事件
       if (scrollTop + scrollH >= scrollWrapH - this.bottomDistance) {
-        this.isLoading = true;
+        this.$emit('update:isLoading', true)
       }
-    },
-    // 当前数据加载完成后调用该函数
-    loaded() {
-      this.isLoading = false;
     },
     // 所有数据加载完成后调用该函数
     compleate() {
-      this.isLoading = false;
+      this.$emit('update:isLoading', false)
       this.isComplate = true;
       this.scroll.removeEventListener("scroll", this.scrollEvent);
     }

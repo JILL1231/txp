@@ -15,7 +15,12 @@
                 <img src="../assets/img/tab_packet.png" alt="猜题赢红包">
                 <p>猜题赢红包</p>
             </a>
-            <span class="tab_msg"></span>
+            <span class="tab_msg" @click="dropDown"></span>
+            <ul class="drop_down" v-show="isOpen" @click="dropDownList">
+                <li class="active">消息</li>
+                <li>消息</li>
+                <li>消息</li>
+            </ul>
         </div>
         <div class="tab-content">
             <keep-alive>
@@ -44,12 +49,17 @@ export default {
   
   data() {
     return {
-      currentComp: "FriendsGuess"
+      currentComp: "FriendsGuess",
+      isOpen:true,
     };
   },
   methods: {
     setComp(comp, index) {
       this.currentComp = comp;
+    },
+    dropDown(){
+        this.isOpen = true;
+
     }
   }
 };

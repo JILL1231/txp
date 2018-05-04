@@ -24,9 +24,9 @@
       <div class="list-content"  v-for="item in items" :key="item.id">
         <span class="list-num">{{item.sup}}</span>
         <p class="list-text">好友献花支持</p>        
-        <List ref="scroll" @loadmore="getList(item.id)" class="list-wrapper" :loaded.sync="states[item.id]">
+        <List ref="scroll" @loadmore="getList(item.id)" class="list-wrapper" :is-loading.sync="states[item.id]">
           <ul class="list-friend">
-              <li v-for="listItem in listItems" :key="listItem.listId">
+              <li v-for="listItem in listItems[item.id - 1]" :key="listItem.listId + Math.random()">
                 <!-- <img src="{{listItem.url}}" alt=""> -->
                 <p class="friend-name">{{listItem.friendName}}</p>
               </li>
@@ -58,7 +58,9 @@ export default {
       },
       limit: 10,
       items: [],
-      listItems:[],
+      listItems:[
+        [], [], []
+      ],
       qus: {},
       options: [],
       note: "",
@@ -76,8 +78,8 @@ export default {
         page:this.page,
         limit: this.limit
       }).then(res => {
-        this.listItems = res.data.option;
-        this.states[id] = true
+        this.$set(this.listItems, id - 1, this.listItems[id-1].concat(res.data.list))
+        this.states[id] = false
         console.log(res);
       }).catch(error => {
         console.log(error);
