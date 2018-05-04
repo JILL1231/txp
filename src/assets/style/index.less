@@ -2,6 +2,26 @@
 html{
     background: #eaedfd;
 }
+.empty{
+    position: absolute;
+    top: 112px;
+    margin: auto;
+}
+.empty-trip{
+    width: 400px;
+    transform: translateY(50%);
+    font-size: 24px;
+    line-height: 40px; 
+    color: rgb(119, 129, 172);
+    box-sizing: border-box;
+    border:3px solid #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-left: 120px;
+    .go-history{
+        color: rgb(43, 132, 232)
+    }
+}
 // index tab
 .tab-items{
     position: relative;
@@ -162,6 +182,10 @@ html{
             color: rgb(87, 118, 204);
             text-transform: uppercase;
             line-height: 34px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
           }
           
     }
@@ -239,6 +263,7 @@ html{
     display: flex;
     width: 640px;
     background-color: #eaedfd;
+    
     .list-content{
         position: relative;
         border-right: 2px solid #f8f9ff;
@@ -289,9 +314,14 @@ html{
             line-height: 18px;
             text-align: center;
         }
+        .list-wrapper {
+            height: calc(100%-60px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
         .list-friend{
             padding-left: 20px;
-            padding-top: 30px;
+            margin-top: 30px;
             li{
                 display: flex;
                 margin-bottom: 20px;
@@ -304,7 +334,6 @@ html{
                 .friend-name{
                     font-size: 24px;
                     color: rgb(100, 110, 138);
-                    line-height: 2.167;
                     line-height: 32px;
                     padding-left: 6px;
                     box-sizing: border-box;

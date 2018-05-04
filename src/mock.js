@@ -39,15 +39,11 @@ router.post('/guessDetail', (req, res) => {
             note:Random.cparagraph( 20,30 ),//随机生成一段中文文本,
             'option|3': [{
                 'id|+1':1,
-                'text': Random.word(1, 4)
+                text: Random.word(1, 4)
             }],
             'supList|3': [{
-                'id|+1': 1,
+                'id|+1':1,
                 sup: Random.integer(2, 100),
-                'list|1-9': [{
-                    'listId|+1': 1,
-                    friendName: Random.cname(),
-                }]
             }]
         })
         console.log(mockData);
@@ -58,4 +54,61 @@ router.post('/guessDetail', (req, res) => {
     }
 
 })
+
+// 好友支持A
+router.post('/getList1', (req, res) => {
+    try {
+        const mockData = Mock.mock({
+            'id': 1,
+            'list|10': [{
+                'listId|+1': 1,
+                url:Random.image('100x100'),
+                friendName: Random.cname()
+            }]
+        })
+        console.log(mockData);
+        res.json(mockData);
+    } catch (error) {
+        console.log(error);
+        res.json(error);
+    }
+})
+// 好友支持B
+router.post('/getList2', (req, res) => {
+    try {
+        const mockData = Mock.mock({
+            'id': 2,
+            'list|10': [{
+                'listId|+1': 1,
+                url:Random.image('100x100'),
+                friendName: Random.cname()
+            }]
+        })
+        console.log(mockData);
+        res.json(mockData);
+    } catch (error) {
+        console.log(error);
+        res.json(error);
+    }
+})
+// 好友支持C
+router.post('/getList3', (req, res) => {
+    try {
+        const mockData = Mock.mock({
+            'id': 3,
+            'list|10': [{
+                'listId|+1': 1,
+                url:Random.image('100x100'),
+                friendName: Random.cname()
+            }]
+        })
+        console.log(mockData);
+        res.json(mockData);
+    } catch (error) {
+        console.log(error);
+        res.json(error);
+    }
+})
+
+
 module.exports = router;

@@ -23,39 +23,72 @@
     <section class="guess-list">
       <div class="list-content"  v-for="item in items" :key="item.id">
         <span class="list-num">{{item.sup}}</span>
-        <p class="list-text">好友献花支持</p>
-        <ul class="list-friend">
-          <li v-for="(listItem, index) in item.list" :key="listItem.listId">
-            <img :src="`/static/images/friend_logo_${index + 1}.png`" alt="">
-            <p class="friend-name">{{listItem.friendName}}</p>
-          </li>
-        </ul>
+        <p class="list-text">好友献花支持</p>        
+        <List ref="scroll" @loadmore="getList(item.id)" class="list-wrapper" :loaded.sync="states[item.id]">
+          <ul class="list-friend">
+              <li v-for="listItem in listItems" :key="listItem.listId">
+                <!-- <img src="{{listItem.url}}" alt=""> -->
+                <p class="friend-name">{{listItem.friendName}}</p>
+              </li>
+          </ul>
+        </List>
+        
       </div>
     </section>
     <router-link to="/Tan" class="tan"><span class="forbid"></span></router-link>
   </div>
 </template>
 <script>
+import List from "../components/detail/List";
 export default {
+  components: {
+    List
+  },
   data() {
     return {
       guessDetail: {
         supList: [
-          {
-            list: [{ friendName: "" }]
-          }
+          {}
         ]
       },
-      items:[],
-      lists:[],
+      states: {
+        1: false,
+        2: false,
+        3: false
+      },
+      limit: 10,
+      items: [],
+      listItems:[],
       qus: {},
-      options:[],
-      note:'',
-      totalNum:'',
+      options: [],
+      note: "",
+      totalNum: ""
     };
   },
+  created () {
+    this.getList(1);
+    this.getList(2);
+    this.getList(3);
+  },
+  methods: {
+    getList(id) {
+      this.$http.post("/api/getList"+id,{
+        page:this.page,
+        limit: this.limit
+      }).then(res => {
+        this.listItems = res.data.option;
+        this.states[id] = true
+        console.log(res);
+      }).catch(error => {
+        console.log(error);
+      });
+    }
+  },
   mounted() {
-    if (this.$route.params.qus && typeof this.$route.params.qus.id !== 'undefined') {
+    if (
+      this.$route.params.qus &&
+      typeof this.$route.params.qus.id !== "undefined"
+    ) {
       this.qus = this.$route.params.qus;
       this.options = this.$route.params.qus.option;
       this.note = this.$route.params.note;
@@ -65,8 +98,12 @@ export default {
       this.guessDetail = res.data;
       this.items = res.data.supList;
       this.options = res.data.option;
+      this.states[id] = true
       console.log(res);
+    }).catch(error => {
+      console.log(error);
     });
+
   }
 };
 </script>
