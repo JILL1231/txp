@@ -15,10 +15,10 @@
             <h3 class="topic-title">{{i.title}}？</h3>
             <span class="topic-time">截止时间{{i.date}}</span>
             <ul class="topic-option">
-              <li>A.{{i.option[0].text}}</li>
-              <li>B.{{i.option[1].text}}</li>
-              <li>C.{{i.option[2].text}}</li>
-            </ul>
+              <li v-for="(option,index) in i.option" :key="option.id">
+                {{toAlpha(index)}}.{{option.text}}
+              </li>
+            </ul> 
           </swipe-item>
         </swipe>
       </div>    
@@ -44,9 +44,9 @@ export default {
     return {
       index: 0,
       itemCommon: [],
-      show:false,
-      totalNum: '',
-      note: ''
+      show: false,
+      totalNum: "",
+      note: ""
     };
   },
   components: {
@@ -58,33 +58,38 @@ export default {
       this.item = 10;
     }, 6000);
     this.$http.post("/api/guess").then(res => {
-      this.itemCommon= res.data.obj;
+      this.itemCommon = res.data.obj;
       console.log(res);
     });
   },
   methods: {
+    // 将数字转为大写字母
+    toAlpha:function(index){
+      return String.fromCharCode(65 + parseInt(index))
+    },
     addError() {
       this.show = true;
     },
-    changeHandler(){
+    changeHandler() {
       this.show = false;
     },
     submitHandler() {
       if (this.totalNum < 1) {
-        this.addError()
-        return
+        this.addError();
+        return;
       }
-      if(this.note === ''){
-        this.note = '小伙伴们，一起来参加我发起的竞猜吧！每人_一次献一朵花，买定离手哦！'
+      if (this.note === "") {
+        this.note =
+          "小伙伴们，一起来参加我发起的竞猜吧！每人_一次献一朵花，买定离手哦！";
       }
       this.$router.push({
-        name: 'detail',
+        name: "detail",
         params: {
           totalNum: this.totalNum,
           note: this.note,
           qus: this.itemCommon[this.index]
         }
-      })
+      });
     }
   }
 };
@@ -290,7 +295,7 @@ export default {
     border-radius: 12px;
     background-color: rgb(237, 92, 81);
   }
-  .trip{
+  .trip {
     position: relative;
     width: 600px;
     margin: 30px auto 0;

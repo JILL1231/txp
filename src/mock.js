@@ -13,7 +13,7 @@ router.post('/guess', (req, res) => {
                 date: '_' + Random.date('M_dd') + '_' + Random.time('h:mm'),//随机生成时间
                 'option|3': [{
                     'id|+1':1,
-                    'text': Random.word(1, 4)
+                    'text': Random.cword(1, 4)
                 }]
             }]
 
@@ -39,7 +39,7 @@ router.post('/guessDetail', (req, res) => {
             note:Random.cparagraph( 20,30 ),//随机生成一段中文文本,
             'option|3': [{
                 'id|+1':1,
-                text: Random.word(1, 4)
+                text: Random.cword(1, 4)
             }],
             'supList|3': [{
                 'id|+1':1,
@@ -60,10 +60,10 @@ router.post('/getList1', (req, res) => {
     try {
         const mockData = Mock.mock({
             'id': 1,
-            'list|10': [{
+            'list|20': [{
                 'listId|+1': 1,
                 url:Random.image('100x100','#bbb','tx'),
-                friendName: Random.cname()
+                friendName: Random.name()  //随机生成一个英文名
             }]
         })
         console.log(mockData);
@@ -78,10 +78,10 @@ router.post('/getList2', (req, res) => {
     try {
         const mockData = Mock.mock({
             'id': 2,
-            'list|10': [{
+            'list|20': [{
                 'listId|+1': 1,
                 url:Random.image('100x100','#bbb','tx'),
-                friendName: Random.cname()
+                friendName: Random.cname() //随机生成一个中文名
             }]
         })
         console.log(mockData);
@@ -96,10 +96,10 @@ router.post('/getList3', (req, res) => {
     try {
         const mockData = Mock.mock({
             'id': 3,
-            'list|10': [{
+            'list|20': [{
                 'listId|+1': 1,
                 url:Random.image('100x100','#bbb','tx'),
-                friendName: Random.cname()
+                friendName: Random.word() //随机生成一个单词
             }]
         })
         console.log(mockData);

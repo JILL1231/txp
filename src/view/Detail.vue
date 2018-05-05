@@ -15,7 +15,7 @@
       <span class="guess-time">截止时间{{qus.date || guessDetail.date}}</span>
       <ul class="guess-option">
         <li v-for="(option,index) in options" :key="option.id">
-          <p>{{index}}{{option.text}}</p>
+          <p>{{toAlpha(index)}}.{{option.text}}</p>
           <img src="../assets/img/ic_flower.png" alt="">
         </li>
       </ul>            
@@ -57,6 +57,7 @@ export default {
         3: false
       },
       limit: 10,
+      page:1,
       items: [],
       listItems:[
         [], [], []
@@ -64,29 +65,36 @@ export default {
       qus: {},
       options: [],
       note: "",
-      totalNum: ""
+      totalNum: "",
+      index:''
     };
   },
   created () {
+    // 初始化list
     this.getList(1);
     this.getList(2);
     this.getList(3);
   },
   methods: {
+    // 将数字转为大写字母
+    toAlpha:function(index){
+      return String.fromCharCode(65 + parseInt(index))
+    },
+    // 获取列表数据，由于mock数据唯一能确定的是id的自增，故暂时用id作为判断获取哪一列数据
     getList(id) {
       this.$http.post("/api/getList"+id,{
         page:this.page,
         limit: this.limit
       }).then(res => {
-        this.$set(this.listItems, id-1 , this.listItems[id-1].concat(res.data.list))
-        this.states[id] = false
-        console.log(res);
+        this.$set(this.listItems, id-1 , this.listItems[id-1].concat(res.data.list));
+        this.states[id] = false;
       }).catch(error => {
         console.log(error);
       });
     }
   },
   mounted() {
+    // 获取编辑页面$route.params传过来的值，若刷新，则取mock数据
     if (
       this.$route.params.qus &&
       typeof this.$route.params.qus.id !== "undefined"
@@ -96,6 +104,7 @@ export default {
       this.note = this.$route.params.note;
       this.totalNum = this.$route.params.totalNum;
     }
+    // 获取mock数据
     this.$http.post("/api/guessDetail").then(res => {
       this.guessDetail = res.data;
       this.items = res.data.supList;
@@ -109,6 +118,3 @@ export default {
   }
 };
 </script>
-<style>
-
-</style>

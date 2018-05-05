@@ -15,12 +15,12 @@
                 <img src="../assets/img/tab_packet.png" alt="猜题赢红包">
                 <p>猜题赢红包</p>
             </a>
-            <span class="tab_msg" @click="dropDown"></span>
+            <!-- <span class="tab_msg" @click="dropDown"></span>
             <ul class="drop_down" v-show="isOpen" @click="dropDownList">
                 <li class="active">消息</li>
                 <li>消息</li>
                 <li>消息</li>
-            </ul>
+            </ul> -->
         </div>
         <div class="tab-content">
             <keep-alive>
