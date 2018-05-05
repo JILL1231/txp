@@ -5,11 +5,6 @@
       <button class="swipe-btn btn-front" @click="index = index <= 0 ? itemCommon.length : index - 1"></button>
       <button class="swipe-btn btn-back" @click="index = index >= itemCommon.length ? 0 : index + 1"></button>
       <div class="topic-swipe">
-        <span class="pattern1"></span>
-        <span class="pattern2"></span>
-        <span class="pattern3"></span>
-        <span class="pattern4"></span>
-        <span class="pattern5"></span>
         <swipe class="slide" v-model="index"  :speed="300">
           <swipe-item v-for="i in itemCommon" :key="i.id">
             <h3 class="topic-title">{{i.title}}？</h3>
@@ -21,6 +16,11 @@
             </ul> 
           </swipe-item>
         </swipe>
+        <span class="pattern1"></span>
+        <span class="pattern2"></span>
+        <span class="pattern3"></span>
+        <span class="pattern4"></span>
+        <span class="pattern5"></span>
       </div>    
     </div>
     <div class="topic-num">
@@ -116,6 +116,8 @@ export default {
     border-radius: 12px;
     background: rgb(255, 255, 255);
     overflow: hidden;
+    // 解决圆角边框和overflow的问题
+    z-index:1;
     .pattern1 {
       position: absolute;
       left: -11px;
