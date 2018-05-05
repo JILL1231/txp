@@ -262,7 +262,8 @@ export default {
       font-size: 23px;
       color: rgb(100, 110, 138);
       text-transform: uppercase;
-      line-height: 88px;
+      height: 88px;
+      line-height: 23px;
       border: 0;
       width: 440px;
       float: right;
@@ -301,7 +302,7 @@ export default {
     position: relative;
     width: 600px;
     margin: 30px auto 0;
-    text-align: left;
+    text-align: center;
     line-height: 24px;
     font-size: 24px;
     color: rgb(237, 92, 81);
