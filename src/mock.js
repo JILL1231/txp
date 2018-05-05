@@ -4,7 +4,7 @@ const Mock = require('mockjs')
 var Random = Mock.Random
 
 // 请求轮播数据
-router.post('/guess', (req, res) => {
+router.get('/guess', (req, res) => {
     try {
         const mockData = Mock.mock({
             'obj|3': [{
@@ -28,7 +28,7 @@ router.post('/guess', (req, res) => {
 })
 
 // 参与页面数据
-router.post('/guessDetail', (req, res) => {
+router.get('/guessDetail', (req, res) => {
     try {
         const mockData = Mock.mock({
             userName: Random.cname(),
@@ -56,7 +56,7 @@ router.post('/guessDetail', (req, res) => {
 })
 
 // 请求好友支持A列表数据
-router.post('/getList1', (req, res) => {
+router.get('/getList1', (req, res) => {
     try {
         const mockData = Mock.mock({
             'id': 1,
@@ -75,7 +75,7 @@ router.post('/getList1', (req, res) => {
 })
 
 // 请求好友支持B列表数据
-router.post('/getList2', (req, res) => {
+router.get('/getList2', (req, res) => {
     try {
         const mockData = Mock.mock({
             'id': 2,
@@ -94,7 +94,7 @@ router.post('/getList2', (req, res) => {
 })
 
 // 请求好友支持C列表数据
-router.post('/getList3', (req, res) => {
+router.get('/getList3', (req, res) => {
     try {
         const mockData = Mock.mock({
             'id': 3,

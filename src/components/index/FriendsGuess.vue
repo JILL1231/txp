@@ -57,7 +57,7 @@ export default {
     setTimeout(() => {
       this.item = 10;
     }, 6000);
-    this.$http.post("/api/guess").then(res => {
+    this.$http.get("/api/guess").then(res => {
       this.itemCommon = res.data.obj;
       console.log(res);
     });
