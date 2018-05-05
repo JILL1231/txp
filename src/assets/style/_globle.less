@@ -1,0 +1,49 @@
+// 宽高
+.mx_wh(@width;@height){
+    position: relative;
+    width: @width;
+    height: @height;
+}
+
+// 文本
+.mx_text(@fontSize;@color;@lineHeight){
+    font-size:@fontSize;
+    color:  @color;
+    line-height: @lineHeight;
+}
+
+// 盒子
+.mx_box(@magin:0;@padding:0;@boxSizing){
+    margin: @magin;
+    padding:@padding;
+    box-sizing: @boxSizing;
+}
+
+// 背景
+.mx_bg(@url;@size){
+    background: @url;
+    background-size: @size;
+}
+
+// 边框
+.mx_border(@border;@bordeRadius){
+    border:@border;
+    border-radius: @bordeRadius;
+}
+.mx_borderB(@border;@bordeRadius){
+    border-bottom:@border;
+    border-radius: @bordeRadius;
+}
+// 控制行数，超出...
+.mx_lineClamp(@lineClamp:2){
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: @lineClamp;
+    overflow: hidden;
+}
+// 超出...
+.mx_overflow{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}

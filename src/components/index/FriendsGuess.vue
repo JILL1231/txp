@@ -27,7 +27,7 @@
       <label for="totalNum">参与人数</label>
       <input type="number" id="totalNum" placeholder="请输入人数" v-model="totalNum" @change="changeHandler">
     </div>
-    <p class="trip" v-show='show'>参与人数不能少于1人哦</p>
+    <p class="trip" v-show='show'>请输入大于1的整数</p>
     <textarea
       class="note-text"
       placeholder="小伙伴们，一起来参加我发起的竞猜吧！每人_一次献一朵花，买定离手哦！"
@@ -74,7 +74,7 @@ export default {
       this.show = false;
     },
     submitHandler() {
-      if (this.totalNum < 1) {
+      if (isNaN( this.totalNum ) || this.totalNum < 1) {
         this.addError();
         return;
       }
@@ -103,6 +103,7 @@ export default {
     padding-bottom: 4px;
   }
   .topic-text {
+
     font-size: 24px;
     color: #646e8a;
     text-align: center;
@@ -263,7 +264,7 @@ export default {
       color: rgb(100, 110, 138);
       text-transform: uppercase;
       height: 88px;
-      line-height: 23px;
+      line-height: 30px;
       border: 0;
       width: 440px;
       float: right;
