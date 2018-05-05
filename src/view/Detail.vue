@@ -82,7 +82,7 @@ export default {
     },
     // 获取列表数据，由于mock数据唯一能确定的是id的自增，故暂时用id作为判断获取哪一列数据
     getList(id) {
-      this.$http.post("/api/getList"+id,{
+      this.$http.get("/api/getList"+id,{
         page:this.page,
         limit: this.limit
       }).then(res => {
@@ -105,7 +105,7 @@ export default {
       this.totalNum = this.$route.params.totalNum;
     }
     // 获取mock数据
-    this.$http.post("/api/guessDetail").then(res => {
+    this.$http.get("/api/guessDetail").then(res => {
       this.guessDetail = res.data;
       this.items = res.data.supList;
       this.options = res.data.option;
