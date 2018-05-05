@@ -27,7 +27,7 @@ router.post('/guess', (req, res) => {
 
 })
 
-// 参与页面请求数据
+// 参与页面数据
 router.post('/guessDetail', (req, res) => {
     try {
         const mockData = Mock.mock({
@@ -55,7 +55,7 @@ router.post('/guessDetail', (req, res) => {
 
 })
 
-// 好友支持A
+// 请求好友支持A列表数据
 router.post('/getList1', (req, res) => {
     try {
         const mockData = Mock.mock({
@@ -73,7 +73,8 @@ router.post('/getList1', (req, res) => {
         res.json(error);
     }
 })
-// 好友支持B
+
+// 请求好友支持B列表数据
 router.post('/getList2', (req, res) => {
     try {
         const mockData = Mock.mock({
@@ -91,7 +92,8 @@ router.post('/getList2', (req, res) => {
         res.json(error);
     }
 })
-// 好友支持C
+
+// 请求好友支持C列表数据
 router.post('/getList3', (req, res) => {
     try {
         const mockData = Mock.mock({
