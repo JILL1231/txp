@@ -15,7 +15,7 @@
                 <img src="../assets/img/tab_packet.png" alt="猜题赢红包">
                 <p>猜题赢红包</p>
             </a>
-            <router-link to="/Msg" class='tab_msg'></router-link>
+            <a class="tab_msg"  @click="setComp('Msg')"></a>
         </div>
         <div class="tab-content">
             <keep-alive>
@@ -33,12 +33,14 @@
 import FriendsGuess from "../components/index/FriendsGuess";
 import FieryGuess from "../components/index/FieryGuess";
 import PacketGuess from "../components/index/PacketGuess";
+import Msg from "../components/index/Msg";
 
 export default {
   components: {
     FriendsGuess,
     FieryGuess,
-    PacketGuess
+    PacketGuess,
+    Msg
   },
   
   data() {
